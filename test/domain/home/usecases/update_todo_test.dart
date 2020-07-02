@@ -1,26 +1,26 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todoapp/domain/detail/repositories/detail_repository.dart';
-import 'package:todoapp/domain/detail/usecases/update_todo.dart';
 import 'package:todoapp/domain/common/entities/todo.dart';
+import 'package:todoapp/domain/home/repositories/home_repository.dart';
+import 'package:todoapp/domain/home/usecases/update_todo.dart';
 
-class MockDetailRepository extends Mock implements DetailRepository {}
+class MockHomeRepository extends Mock implements HomeRepository {}
 
 void main() {
   UpdateTodo updateTodo;
-  MockDetailRepository mockDetailRepository;
+  MockHomeRepository mockHomeRepository;
 
   setUp(() {
-    mockDetailRepository = MockDetailRepository();
-    updateTodo = UpdateTodo(detailRepository: mockDetailRepository);
+    mockHomeRepository = MockHomeRepository();
+    updateTodo = UpdateTodo(homeRepository: mockHomeRepository);
   });
 
-  final todo = Todo(id: "1", title: "Title 1 updated", content: "Content 1 updated");
+  final todo = Todo(id: 1, title: "Title 1 updated", content: "Content 1 updated", isComplete: true);
   final updateResult = true;
 
   test("should update todo success", () async {
     //arrange
-    when(mockDetailRepository.updateTodo(any))
+    when(mockHomeRepository.updateTodo(any))
         .thenAnswer((_) async => updateResult);
     //act
     final result = await updateTodo(todo).catchError((error) {

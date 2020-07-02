@@ -14,7 +14,7 @@ void main() {
     deleteTodo = DeleteTodo(homeRepository: mockHomeRepository);
   });
 
-  final deleteId = "1";
+  int deleteId = 1;
   final deleteResult = true;
 
   test("should delete todo success", () async {

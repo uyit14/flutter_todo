@@ -18,9 +18,9 @@ void main() {
   final todoList = List<Todo>.generate(
       5,
       (index) => Todo(
-          id: index.toString(),
+          id: index,
           title: 'Title $index',
-          content: 'Content $index'));
+          content: 'Content $index', isComplete: true));
 
   test('should get todo list success', () async {
     //arrange

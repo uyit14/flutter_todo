@@ -15,7 +15,7 @@ void main() {
     createTodo = CreateTodo(homeRepository: mockHomeRepository);
   });
 
-  final todo = Todo(id: "1", title: "Title 1", content: "Content 1");
+  final todo = Todo(id: 1, title: "Title 1", content: "Content 1", isComplete: true);
   final createResult = true;
 
   test("should create todo success", () async {

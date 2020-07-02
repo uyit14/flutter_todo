@@ -2,13 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 class Todo extends Equatable{
-  final String id;
+  final int id;
   final String title;
   final String content;
+  final bool isComplete;
 
-  Todo({@required this.id, @required this.title, @required this.content});
+  Todo({@required this.id, @required this.title, @required this.content, @required this.isComplete});
 
   @override
-  List<Object> get props => [id, title, content];
+  List<Object> get props => [id, title, content, isComplete];
 
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'file:///F:/FLUTTER/flutter_todo/lib/domain/common/usecases/base_usecase.dart';
 import 'package:todoapp/domain/home/repositories/home_repository.dart';
 
-class DeleteTodo implements BaseUseCase<bool, String> {
+import '../../common/usecases/base_usecase.dart';
+
+class DeleteTodo implements BaseUseCase<bool, int> {
   final HomeRepository _homeRepository;
 
   DeleteTodo({@required HomeRepository homeRepository})
@@ -10,7 +11,7 @@ class DeleteTodo implements BaseUseCase<bool, String> {
         _homeRepository = homeRepository;
 
   @override
-  Future<bool> call([String params]) async {
+  Future<bool> call([int params]) async {
     return await _homeRepository.deleteTodo(params);
   }
 }
