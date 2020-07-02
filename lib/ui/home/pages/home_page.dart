@@ -67,9 +67,6 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             widget._homeBloc.requestInsertTodo(Todo(
                 title: "Title 2", content: "Content 2", isComplete: true));
-            setState(() {
-
-            });
           },
         ),
       ),
