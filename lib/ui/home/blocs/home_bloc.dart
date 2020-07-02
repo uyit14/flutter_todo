@@ -84,6 +84,16 @@ class HomeBloc {
     return result;
   }
 
+  Future<bool> requestUpdateTodo(Todo todo) async {
+    final result = await _updateTodo(todo);
+    return result;
+  }
+
+  Future<bool> requestDeleteTodo(int id) async {
+    final result = await _deleteTodo(id);
+    return result;
+  }
+
   void dispose() {
     _todoListController.close();
     _todoCompleteListController.close();

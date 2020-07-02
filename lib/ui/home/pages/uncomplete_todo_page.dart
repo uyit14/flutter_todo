@@ -42,7 +42,7 @@ class _UnCompleteTodoPageState extends State<UnCompleteTodoPage> {
                     todo: todoList[index],
                     onChangeStatus: (){},
                     onDeleteTodo: (){},
-                    key: UniqueKey(),
+                    key: ValueKey('uncomplete$index'),
                   );
                 }
             );

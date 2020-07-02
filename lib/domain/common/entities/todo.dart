@@ -7,7 +7,7 @@ class Todo extends Equatable{
   final String content;
   final bool isComplete;
 
-  Todo({@required this.id, @required this.title, @required this.content, @required this.isComplete});
+  Todo({this.id, @required this.title, @required this.content, @required this.isComplete});
 
   @override
   List<Object> get props => [id, title, content, isComplete];

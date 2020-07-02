@@ -42,7 +42,7 @@ class _CompleteTodoPageState extends State<CompleteTodoPage> {
                     todo: todoList[index],
                     onChangeStatus: (){},
                     onDeleteTodo: (){},
-                    key: UniqueKey(),
+                    key: ValueKey('complete$index'),
                   );
                 }
             );

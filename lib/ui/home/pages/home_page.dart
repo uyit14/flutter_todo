@@ -64,9 +64,11 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            widget._homeBloc.requestInsertTodo(Todo(
+          onPressed: () async {
+           final result = await widget._homeBloc.requestInsertTodo(Todo(
                 title: "Title 2", content: "Content 2", isComplete: true));
+           if(result)
+             setState(() {});
           },
         ),
       ),

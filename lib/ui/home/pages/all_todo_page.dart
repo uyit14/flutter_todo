@@ -40,7 +40,7 @@ class _AllTodoPageState extends State<AllTodoPage> {
                   todo: todoList[index],
                   onChangeStatus: (){},
                   onDeleteTodo: (){},
-                  key: UniqueKey(),
+                  key: ValueKey('all$index'),
                 );
               }
           );
