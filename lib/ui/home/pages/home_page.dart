@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/domain/common/entities/todo.dart';
 import 'package:todoapp/ui/home/blocs/home_bloc.dart';
+import 'package:todoapp/ui/home/widgets/new_todo_widget.dart';
 
 import 'all_todo_page.dart';
 import 'complete_todo_page.dart';
-import 'uncomplete_todo_page.dart';
+import 'incomplete_todo_page.dart';
 
 class HomePage extends StatefulWidget {
   final HomeBloc _homeBloc;
@@ -18,9 +19,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Map<String, Object>> _pages = [
-    {'page': AllTodoPage(), 'title': 'AllTodo'},
-    {'page': CompleteTodoPage(), 'title': 'Complete'},
-    {'page': UnCompleteTodoPage(), 'title': 'UnComplete'}
+    {'page': AllTodoPage(), 'title': 'All todo'},
+    {'page': CompleteTodoPage(), 'title': 'Completed todo'},
+    {'page': InCompleteTodoPage(), 'title': 'Incomplete todo'}
   ];
 
   int _selectedPageIndex = 0;
@@ -31,6 +32,30 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _onCreateTodo(String title, String content) async {
+    final todo = Todo(title: title, content: content, isComplete: false);
+    final result = await widget._homeBloc.requestInsertTodo(todo);
+    if (result) {
+      widget._homeBloc.requestGetTodoList();
+    }
+  }
+
+  void _openAddNewTodo(BuildContext ctx) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: ctx,
+      builder: (_) {
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: GestureDetector(
+              child: NewTodo(_onCreateTodo),
+              onTap: () {},
+              behavior: HitTestBehavior.opaque),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Provider<HomeBloc>(
@@ -39,6 +64,14 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(_pages[_selectedPageIndex]['title']),
+          actions: <Widget>[
+            FlatButton.icon(
+                onPressed: () async {
+                  _openAddNewTodo(context);
+                },
+                icon: Icon(Icons.note_add, size: 40,),
+                label: Text(""))
+          ],
         ),
         body: _pages[_selectedPageIndex]['page'],
         bottomNavigationBar: BottomNavigationBar(
@@ -55,21 +88,13 @@ class _HomePageState extends State<HomePage> {
                 title: Text('All')),
             BottomNavigationBarItem(
                 backgroundColor: Theme.of(context).primaryColor,
-                icon: Icon(Icons.done, size: 26),
+                icon: Icon(Icons.archive, size: 26),
                 title: Text('Complete')),
             BottomNavigationBarItem(
                 backgroundColor: Theme.of(context).primaryColor,
-                icon: Icon(Icons.not_interested, size: 26),
-                title: Text('UnComplete')),
+                icon: Icon(Icons.unarchive, size: 26),
+                title: Text('InComplete')),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-           final result = await widget._homeBloc.requestInsertTodo(Todo(
-                title: "Title 2", content: "Content 2", isComplete: true));
-           if(result)
-             setState(() {});
-          },
         ),
       ),
     );

@@ -43,12 +43,46 @@ class DBProvider {
 
   Future<List<Map<String, dynamic>>> getTodoMapList() async {
     final db = await _getDatabase();
-    var result = await db.query(TABLE_NAME, orderBy: '$COLUMN_TITLE ASC');
+    var result = await db.query(TABLE_NAME, orderBy: '$COLUMN_ID DESC');
     return result;
   }
 
   Future<List<TodoModel>> getTodoList() async {
     var todoMapList = await getTodoMapList();
+    int count = todoMapList.length;
+
+    List<TodoModel> todoList = List<TodoModel>();
+    for (int i = 0; i < count; i++) {
+      todoList.add(TodoModel.fromMap(todoMapList[i]));
+    }
+    return todoList;
+  }
+
+  Future<List<Map<String, dynamic>>> getCompleteTodoMapList() async {
+    final db = await _getDatabase();
+    var result = await db.query(TABLE_NAME, orderBy: '$COLUMN_ID DESC', where: '$COLUMN_COMPLETE = 1');
+    return result;
+  }
+
+  Future<List<TodoModel>> getCompleteTodoList() async {
+    var todoMapList = await getCompleteTodoMapList();
+    int count = todoMapList.length;
+
+    List<TodoModel> todoList = List<TodoModel>();
+    for (int i = 0; i < count; i++) {
+      todoList.add(TodoModel.fromMap(todoMapList[i]));
+    }
+    return todoList;
+  }
+
+  Future<List<Map<String, dynamic>>> getInCompleteTodoMapList() async {
+    final db = await _getDatabase();
+    var result = await db.query(TABLE_NAME, orderBy: '$COLUMN_ID DESC', where: '$COLUMN_COMPLETE = 0');
+    return result;
+  }
+
+  Future<List<TodoModel>> getInCompleteTodoList() async {
+    var todoMapList = await getInCompleteTodoMapList();
     int count = todoMapList.length;
 
     List<TodoModel> todoList = List<TodoModel>();

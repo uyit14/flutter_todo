@@ -27,4 +27,16 @@ class HomeRepositoryImpl implements HomeRepository {
     final result = await DBProvider().updateTodo(TodoMapper.toTodoModel(todo));
     return result != 0;
   }
+
+  @override
+  Future<List<Todo>> getCompleteTodoList() async {
+    final result = await DBProvider().getCompleteTodoList();
+    return TodoMapper.toTodoEntityList(result);
+  }
+
+  @override
+  Future<List<Todo>> getInCompleteTodoList() async {
+    final result = await DBProvider().getInCompleteTodoList();
+    return TodoMapper.toTodoEntityList(result);
+  }
 }
