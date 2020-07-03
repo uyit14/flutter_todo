@@ -17,7 +17,7 @@
 	For test local - run "flutter run test/{path_to_test_file}" (Ex: "flutter run test/data/home/repositories/home_repository_impl_test.dart")
 ## 4. Screenshot ##
 **Add new todo screen*
-![Add new todo screen](https://github.com/uyit14/flutter_todo/blob/master/assets/screenshots/Screenshot_20200703-155821.jpg|width=100)
+![Add new todo screen](https://github.com/uyit14/flutter_todo/blob/master/assets/screenshots/Screenshot_20200703-155821.jpg | width=100)
 
 **All todo list**
 ![All todo list](https://github.com/uyit14/flutter_todo/blob/master/assets/screenshots/Screenshot_20200703-160035.jpg)
