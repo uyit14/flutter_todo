@@ -39,7 +39,7 @@ class _CompleteTodoPageState extends State<CompleteTodoPage> {
                       onDeleteTodo: (){
                         _homeBloc.requestDeleteTodo(_todoList[index].id, TodoType.complete);
                       },
-                      key: ValueKey('all$index'),
+                      key: ValueKey('complete$index'),
                     );
                   }
               );

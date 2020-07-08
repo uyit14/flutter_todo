@@ -39,7 +39,7 @@ class _InCompleteTodoPageState extends State<InCompleteTodoPage> {
                       onDeleteTodo: (){
                         _homeBloc.requestDeleteTodo(_todoList[index].id, TodoType.incomplete);
                       },
-                      key: ValueKey('all$index'),
+                      key: ValueKey('incomplete$index'),
                     );
                   }
               );
